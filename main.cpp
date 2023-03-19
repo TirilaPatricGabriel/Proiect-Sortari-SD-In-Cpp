@@ -348,15 +348,28 @@ int main() {
         auto duration8 = duration_cast<microseconds>(stop8 - start8);
         cout << "Time shellsort: "<< duration8.count() << " microseconds" << endl;
 //        cout<<check(Vector, V)<<endl;
+
+        V = Vector;
+        auto start7 = high_resolution_clock::now();
+        sort(V.begin(), V.end());
+        auto stop7 = high_resolution_clock::now();
+        auto duration7 = duration_cast<microseconds>(stop7 - start7);
+        cout << "Time countingsort: "<< duration7.count() << " microseconds" << endl;
     }
 
-    n = 1000;
-    m = 1000;
-    cout<<"====================N=100000, M=100000, sorted  vector ======================="<<endl;
+    n = 10000000;
+    m = 10000000;
+    cout<<"====================N=100000, M=100000, sorted  vector desc ======================="<<endl;
     Vector = generateRandomVector(n, m);
 //    sort(Vector.begin(), Vector.end());                                   // CRESCATOR SORTAT
     sort(Vector.begin(), Vector.end(), greater<int>());      // DESCRESCATOR SORTAT
     V = Vector;
+    auto start7 = high_resolution_clock::now();
+    sort(V.begin(), V.end());
+    auto stop7 = high_resolution_clock::now();
+    auto duration7 = duration_cast<microseconds>(stop7 - start7);
+    cout << "Time countingsort: "<< duration7.count() << " microseconds" << endl;
+        V = Vector;
     auto start1 = high_resolution_clock::now();
     radixSort3(V);
     auto stop1 = high_resolution_clock::now();
@@ -388,7 +401,7 @@ int main() {
     cout << "Time mergesort: "<< duration4.count() << " microseconds" << endl;
 //        cout<<check(Vector, V)<<endl;
 
-    if(n<50000000) {
+    if(n < 100000000 || m >= 100000) {
         V = Vector;
         auto start5 = high_resolution_clock::now();
         quicksort(V, 0, V.size() - 1);
@@ -404,6 +417,8 @@ int main() {
         auto duration6 = duration_cast<microseconds>(stop6 - start6);
         cout << "Time quicksort cu pivot din mediana de 3: " << duration6.count() << " microseconds" << endl;
         //        cout<<check(Vector, V)<<endl;
+    } else {
+        cout<<"Quick sort nu poate sorta suficient de rapid!"<<endl;
     }
 
     V = Vector;
